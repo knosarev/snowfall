@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snowflake</title>
+  <style>
+    html, body {
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(#123, #111);
+    }
+
+    @keyframes snowfall {
+      0% {
+        transform: translate3d(var(--left-start), 0, 0);
+      }
+      100% {
+        transform: translate3d(var(--left-end), 110vh, 0);
+      }
+    }
+
+    .snowflake {
+      width: var(--size);
+      height: var(--size);
+      background-color: white;
+      border-radius: 50%;
+      position: absolute;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    function generateRandomIntegerInRange(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    $(document).ready(function() {
+      const snowflakesAmount = 50;
+
+      for (let i = 0; i < snowflakesAmount; i++) {
+        const snowflakeEl = $(
+          `<div class="snowflake""></div>`
+        ).css({
+          '--size': `${generateRandomIntegerInRange(3, 10) * 0.1}vw`,
+          '--left-start': `${generateRandomIntegerInRange(1, 20) - 10}vw`,
+          '--left-end': `${generateRandomIntegerInRange(1, 20) - 10}vw`,
+          left: `${generateRandomIntegerInRange(1, 100)}vw`,
+          animation: `snowfall ${5 + generateRandomIntegerInRange(1, 10)}s linear infinite`,
+          'animation-delay': `-${generateRandomIntegerInRange(1, 10)}s`,
+        });
+        $(document.body).append(snowflakeEl);
+      }
+    });
+
+  </script>
+</head>
+<body></body>
+</html>
